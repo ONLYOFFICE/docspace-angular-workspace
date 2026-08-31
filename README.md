@@ -105,7 +105,8 @@ One library major per Angular major, each on its own long-lived branch: `master`
 line still maintained, and every newer Angular major gets a `feature/angular-v-<n>` branch that the
 older line is merged forward into. The pairing is the compatibility table in the
 [library README](projects/onlyoffice/docspace-angular/README.md#versions) — this branch is the
-Angular 21 line and publishes v2.x, while `master` stays on Angular 20 and publishes v1.x.
+Angular 22 line and publishes v3.x, while `feature/angular-v-21` carries v2.x and `master` stays on
+Angular 20 with v1.x.
 
 Both [`create-tag.yml`](.github/workflows/create-tag.yml) and
 [`release.yml`](.github/workflows/release.yml) read the first version heading out of

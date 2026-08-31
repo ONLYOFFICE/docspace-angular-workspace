@@ -1,5 +1,8 @@
 # Change Log
 
+## 3.0.0
+- angular 22
+
 ## 2.0.0
 - angular 21
 
