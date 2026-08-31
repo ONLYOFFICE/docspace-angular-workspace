@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@onlyoffice/docspace-angular": [
+        "./dist/onlyoffice/docspace-angular"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -22,5 +27,13 @@
     "typeCheckHostBindings": true,
     "strictTemplates": true
   },
-  "files": []
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/onlyoffice/docspace-angular/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/onlyoffice/docspace-angular/tsconfig.spec.json"
+    }
+  ]
 }

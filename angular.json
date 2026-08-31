@@ -3,5 +3,31 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "@onlyoffice/docspace-angular": {
+      "projectType": "library",
+      "root": "projects/onlyoffice/docspace-angular",
+      "sourceRoot": "projects/onlyoffice/docspace-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/onlyoffice/docspace-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/onlyoffice/docspace-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/onlyoffice/docspace-angular/tsconfig.spec.json"
+          }
+        }
+      }
+    }
   }
 }
