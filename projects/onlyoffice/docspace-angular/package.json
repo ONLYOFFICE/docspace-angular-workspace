@@ -1,9 +1,30 @@
 {
   "name": "@onlyoffice/docspace-angular",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Angular component for ONLYOFFICE DocSpace",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ONLYOFFICE/docspace-angular-workspace/issues",
+    "email": "support@onlyoffice.com"
+  },
+  "homepage": "https://www.onlyoffice.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONLYOFFICE/docspace-angular-workspace.git"
+  },
+  "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
+  "maintainers": [
+    "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
+  ],
+  "keywords": [
+    "onlyoffice",
+    "docspace",
+    "angular"
+  ],
   "peerDependencies": {
-    "@angular/common": "^20.3.0",
-    "@angular/core": "^20.3.0"
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@onlyoffice/docspace-sdk-js": "^2.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

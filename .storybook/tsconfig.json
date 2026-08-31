@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [],
+    // The workspace tsconfig points the package name at dist/, so stories would
+    // only see the last build. Storybook compiles the sources anyway, so here it
+    // resolves to them and a story picks up an edit without a rebuild.
+    "paths": {
+      "@onlyoffice/docspace-angular": ["../projects/onlyoffice/docspace-angular/src/public-api.ts"]
+    }
+  },
+  "include": ["preview.ts", "../stories/**/*.ts"]
+}

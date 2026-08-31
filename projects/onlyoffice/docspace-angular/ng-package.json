@@ -3,5 +3,9 @@
   "dest": "../../../dist/onlyoffice/docspace-angular",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "./CHANGELOG.md",
+    "./LICENSE"
+  ]
 }

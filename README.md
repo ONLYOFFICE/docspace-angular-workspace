@@ -1,59 +1,110 @@
-# DocspaceAngularWorkspace
+# ONLYOFFICE DocSpace Angular Workspace
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.35.
+This repository is the Angular CLI workspace that hosts the source code of
+[`@onlyoffice/docspace-angular`](https://www.npmjs.com/package/@onlyoffice/docspace-angular) —
+an Angular component that integrates [ONLYOFFICE DocSpace](https://github.com/ONLYOFFICE/DocSpace)
+into Angular applications.
 
-## Development server
+**Please note**: To work with the component, you need to have ONLYOFFICE DocSpace. If you are new to
+DocSpace, [create an account](https://www.onlyoffice.com/docspace-registration.aspx).
 
-To start a local development server, run:
+## Repository structure
 
-```bash
-ng serve
+```
+.
+├── projects/
+│   └── onlyoffice/
+│       └── docspace-angular/   # the @onlyoffice/docspace-angular library
+│           ├── src/            # component sources
+│           ├── README.md       # installation guide, usage examples and API reference
+│           └── CHANGELOG.md    # version history
+├── stories/                    # Storybook stories, a dev harness against a real portal
+├── .storybook/                 # Storybook configuration
+├── angular.json                # Angular CLI workspace configuration
+└── package.json                # workspace dependencies and scripts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The workspace holds exactly one project, so the Angular CLI resolves it automatically — passing the
+full scoped name (`ng build @onlyoffice/docspace-angular`) also works.
 
-## Code scaffolding
+For installation instructions, usage examples, and the full API reference, see the
+[library README](projects/onlyoffice/docspace-angular/README.md).
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Development
 
-```bash
-ng generate component component-name
+### Prerequisites
+
+- [Node.js (and npm)](https://nodejs.org/en), the version in [`.nvmrc`](.nvmrc)
+
+### Clone the project from the GitHub repository:
+```
+git clone https://github.com/ONLYOFFICE/docspace-angular-workspace
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+### Install the project dependencies:
+```
+npm install
 ```
 
-## Building
+### Build the library:
+```
+npm run build
+```
+The build output is placed in `dist/onlyoffice/docspace-angular`.
 
-To build the project run:
-
-```bash
-ng build
+### Test the component:
+```
+npm test
+```
+That is Karma's interactive watch mode with a real Chrome. For a one-shot run (CI, agents):
+```
+npm run test:ci
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+### Create the package:
+```
+cd dist/onlyoffice/docspace-angular
+npm pack
 ```
 
-## Running end-to-end tests
+## Storybook
 
-For end-to-end (e2e) testing, run:
+The stories open a real DocSpace, so they need a portal to point at. Copy *.env.example* to *.env*
+and fill it in:
+```
+STORYBOOK_DOCSPACE_URL=https://example-onlyoffice.com
+STORYBOOK_DOCSPACE_FILE_ID=100000
+```
+Only the *STORYBOOK_*-prefixed variables reach the browser. *STORYBOOK_DOCSPACE_FILE_ID* is the file
+the *Editor* story opens, it can be any file id from the portal above.
 
-```bash
-ng e2e
+### Start Storybook:
+```
+npm run storybook
+```
+### Build Storybook:
+```
+npm run build-storybook
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Release process
 
-## Additional Resources
+Both [`create-tag.yml`](.github/workflows/create-tag.yml) and
+[`release.yml`](.github/workflows/release.yml) read the first version heading out of
+`projects/onlyoffice/docspace-angular/CHANGELOG.md` to tag and publish a release, and `release.yml`
+takes the top changelog section as the GitHub release notes. Pushing to `master` auto-tags a release,
+and the tag push in turn triggers the npm publish — so bump the changelog and the library
+`package.json` version together with any release-worthy change.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Feedback and support
+
+In case you have any issues, questions, or suggestions for the ONLYOFFICE DocSpace Angular component,
+please refer to the [Issues](https://github.com/ONLYOFFICE/docspace-angular-workspace/issues) section.
+
+Official project website: [www.onlyoffice.com](https://www.onlyoffice.com/).
+
+Support forum: [forum.onlyoffice.com](https://forum.onlyoffice.com/).
+
+## License
+
+The source code is licensed under the [Apache-2.0](LICENSE) license.

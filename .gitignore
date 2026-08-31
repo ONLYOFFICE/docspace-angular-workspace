@@ -41,3 +41,14 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Storybook
+/storybook-static
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Packed tarballs
+*.tgz

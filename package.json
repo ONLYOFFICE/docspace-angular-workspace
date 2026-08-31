@@ -1,12 +1,30 @@
 {
-  "name": "docspace-angular-workspace",
+  "name": "@onlyoffice/docspace-angular-workspace",
+  "description": "Angular workspace for the @onlyoffice/docspace-angular library, an Angular component for embedding ONLYOFFICE DocSpace.",
   "version": "0.0.0",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ONLYOFFICE/docspace-angular-workspace/issues",
+    "email": "support@onlyoffice.com"
+  },
+  "homepage": "https://www.onlyoffice.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONLYOFFICE/docspace-angular-workspace.git"
+  },
+  "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
+  "maintainers": [
+    "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
+  ],
+  "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "storybook": "ng run @onlyoffice/docspace-angular:storybook",
+    "build-storybook": "ng run @onlyoffice/docspace-angular:build-storybook"
   },
   "prettier": {
     "printWidth": 100,
@@ -20,7 +38,6 @@
       }
     ]
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
@@ -32,9 +49,15 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.3.35",
+    "@angular/animations": "^20.3.30",
     "@angular/build": "^20.3.35",
     "@angular/cli": "^20.3.35",
     "@angular/compiler-cli": "^20.3.0",
+    "@angular/platform-browser-dynamic": "^20.3.30",
+    "@onlyoffice/docspace-sdk-js": "^2.1.0",
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/angular": "^10.5.10",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
@@ -43,6 +66,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.3.0",
+    "storybook": "^10.5.10",
     "typescript": "~5.9.2"
   }
 }
