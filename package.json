@@ -21,6 +21,7 @@
     "ng": "ng",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "lint": "eslint .",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "storybook": "ng run @onlyoffice/docspace-angular:storybook",
@@ -59,6 +60,8 @@
     "@storybook/addon-docs": "^10.5.10",
     "@storybook/angular": "^10.5.10",
     "@types/jasmine": "~5.1.0",
+    "angular-eslint": "^20.7.0",
+    "eslint": "^9.39.5",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -67,6 +70,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.3.0",
     "storybook": "^10.5.10",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.68.0"
   }
 }

@@ -20,6 +20,7 @@ DocSpace, [create an account](https://www.onlyoffice.com/docspace-registration.a
 │           └── CHANGELOG.md    # version history
 ├── stories/                    # Storybook stories, a dev harness against a real portal
 ├── .storybook/                 # Storybook configuration
+├── eslint.config.js            # ESLint flat config, covers the library, stories and Storybook
 ├── angular.json                # Angular CLI workspace configuration
 └── package.json                # workspace dependencies and scripts
 ```
@@ -51,6 +52,11 @@ npm install
 npm run build
 ```
 The build output is placed in `dist/onlyoffice/docspace-angular`.
+
+### Lint the sources:
+```
+npm run lint
+```
 
 ### Test the component:
 ```
