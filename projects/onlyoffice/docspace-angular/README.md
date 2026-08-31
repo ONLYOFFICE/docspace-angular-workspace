@@ -8,13 +8,14 @@ This repo contains the ONLYOFFICE DocSpace Angular component which integrates [O
 
 | Angular          | docspace-angular |
 |------------------|:----------------:|
-| >=20.0.0         |       v1.x       |
+| >=21.0.0 <22.0.0 |       v2.x       |
+| >=20.0.0 <21.0.0 |       v1.x       |
 
 ## Prerequisites
 
 This procedure requires [Node.js (and npm)](https://nodejs.org/en).
 
-The component is built for Angular 20 and requires *@angular/common*, *@angular/core* and *@onlyoffice/docspace-sdk-js* 2.x as peer dependencies.
+The component is built for Angular 21 and requires *@angular/common*, *@angular/core* and *@onlyoffice/docspace-sdk-js* 2.x as peer dependencies.
 
 ## Creating the demo Angular application with ONLYOFFICE DocSpace
 

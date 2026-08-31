@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.0.0
+- angular 21
+
 ## 1.0.0
 - Initial release
 - angular 20
