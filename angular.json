@@ -30,6 +30,7 @@
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
+            "browserTarget": "@onlyoffice/docspace-angular:build",
             "configDir": ".storybook",
             "tsConfig": ".storybook/tsconfig.json",
             "styles": ["stories/stories.css"],
@@ -41,6 +42,7 @@
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
+            "browserTarget": "@onlyoffice/docspace-angular:build",
             "configDir": ".storybook",
             "tsConfig": ".storybook/tsconfig.json",
             "styles": ["stories/stories.css"],

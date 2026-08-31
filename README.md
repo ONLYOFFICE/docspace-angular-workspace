@@ -93,6 +93,12 @@ npm run storybook
 npm run build-storybook
 ```
 
+Both Storybook targets in `angular.json` set `browserTarget` to the library's own `build` target.
+That looks odd for an ng-packagr target and it is: `@storybook/angular` refuses to start unless the
+option is set at all, and this workspace has no application to point it at. Nothing is read from it —
+the `tsConfig` next to it is what Storybook actually compiles against — but dropping it brings back
+`SB_FRAMEWORK_ANGULAR_0001`.
+
 ## Release process
 
 Both [`create-tag.yml`](.github/workflows/create-tag.yml) and
