@@ -1,12 +1,12 @@
-# ONLYOFFICE DocSpace Angular Workspace
+# ONLYOFFICE Apps Angular Workspace
 
 This repository is the Angular CLI workspace that hosts the source code of
 [`@onlyoffice/docspace-angular`](https://www.npmjs.com/package/@onlyoffice/docspace-angular) —
-an Angular component that integrates [ONLYOFFICE DocSpace](https://github.com/ONLYOFFICE/DocSpace)
+an Angular component that integrates [ONLYOFFICE Apps](https://github.com/ONLYOFFICE/DocSpace)
 into Angular applications.
 
-**Please note**: To work with the component, you need to have ONLYOFFICE DocSpace. If you are new to
-DocSpace, [create an account](https://www.onlyoffice.com/docspace-registration.aspx).
+**Please note**: To work with the component, you need to have ONLYOFFICE Apps. If you are new to
+ONLYOFFICE Apps, [create an account](https://www.onlyoffice.com/docspace-registration.aspx).
 
 ## Repository structure
 
@@ -18,7 +18,7 @@ DocSpace, [create an account](https://www.onlyoffice.com/docspace-registration.a
 │           ├── src/            # component sources
 │           ├── README.md       # installation guide, usage examples and API reference
 │           └── CHANGELOG.md    # version history
-├── stories/                    # Storybook stories, a dev harness against a real portal
+├── stories/                    # Storybook stories, a dev harness against a real workspace
 ├── .storybook/                 # Storybook configuration
 ├── eslint.config.js            # ESLint flat config, covers the library, stories and Storybook
 ├── angular.json                # Angular CLI workspace configuration
@@ -75,14 +75,14 @@ npm pack
 
 ## Storybook
 
-The stories open a real DocSpace, so they need a portal to point at. Copy *.env.example* to *.env*
-and fill it in:
+The stories open a real ONLYOFFICE Apps instance, so they need a workspace to point at. Copy
+*.env.example* to *.env* and fill it in:
 ```
 STORYBOOK_DOCSPACE_URL=https://example-onlyoffice.com
 STORYBOOK_DOCSPACE_FILE_ID=100000
 ```
 Only the *STORYBOOK_*-prefixed variables reach the browser. *STORYBOOK_DOCSPACE_FILE_ID* is the file
-the *Editor* story opens, it can be any file id from the portal above.
+the *Editor* story opens, it can be any file id from the workspace above.
 
 ### Start Storybook:
 ```
@@ -117,7 +117,7 @@ and the tag push in turn triggers the npm publish — so bump the changelog and 
 
 ## Feedback and support
 
-In case you have any issues, questions, or suggestions for the ONLYOFFICE DocSpace Angular component,
+In case you have any issues, questions, or suggestions for the ONLYOFFICE Apps Angular component,
 please refer to the [Issues](https://github.com/ONLYOFFICE/docspace-angular-workspace/issues) section.
 
 Official project website: [www.onlyoffice.com](https://www.onlyoffice.com/).

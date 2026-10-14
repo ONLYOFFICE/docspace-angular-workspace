@@ -19,7 +19,7 @@
 // none of this is part of the published library.
 declare const process: { env: Record<string, string | undefined> };
 
-/** The DocSpace portal every story points at. */
+/** The ONLYOFFICE Apps workspace every story points at. */
 export const DOCSPACE_URL = process.env['STORYBOOK_DOCSPACE_URL'] ?? '';
 
 /** The file the Editor story opens. */

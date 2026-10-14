@@ -31,7 +31,7 @@ import type { TFrameConfig } from '@onlyoffice/docspace-sdk-js/dist/types/types'
 @Injectable({ providedIn: 'root' })
 export class DocSpaceSdk {
   /**
-   * Opens a DocSpace frame in the element `config.frameId` points at.
+   * Opens an ONLYOFFICE Apps frame in the element `config.frameId` points at.
    *
    * Every call gets an SDK object of its own, so that nothing is shared between
    * frames: the SDK keys the frames it tracks by `frameId`, and reinitialises an

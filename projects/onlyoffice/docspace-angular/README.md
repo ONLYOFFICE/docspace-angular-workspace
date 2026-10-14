@@ -1,8 +1,8 @@
 # @onlyoffice/docspace-angular
 
-This repo contains the ONLYOFFICE DocSpace Angular component which integrates [ONLYOFFICE DocSpace](https://github.com/ONLYOFFICE/DocSpace) into [Angular](https://angular.dev/) projects.
+This repo contains the ONLYOFFICE Apps Angular component which integrates [ONLYOFFICE Apps](https://github.com/ONLYOFFICE/DocSpace) into [Angular](https://angular.dev/) projects.
 
-**Please note**: To work with this component, you need to have ONLYOFFICE DocSpace. If you are new to DocSpace, [create an account](https://www.onlyoffice.com/docspace-registration.aspx).
+**Please note**: To work with this component, you need to have ONLYOFFICE Apps. If you are new to ONLYOFFICE Apps, [create an account](https://www.onlyoffice.com/docspace-registration.aspx).
 
 ## Versions
 
@@ -18,9 +18,9 @@ This procedure requires [Node.js (and npm)](https://nodejs.org/en).
 
 The component is built for Angular 22 and requires *@angular/common*, *@angular/core* and *@onlyoffice/docspace-sdk-js* 2.x as peer dependencies.
 
-## Creating the demo Angular application with ONLYOFFICE DocSpace
+## Creating the demo Angular application with ONLYOFFICE Apps
 
-This procedure creates a [basic Angular application](https://angular.dev/installation) and installs ONLYOFFICE DocSpace in it.
+This procedure creates a [basic Angular application](https://angular.dev/installation) and installs ONLYOFFICE Apps in it.
 
 1. Open a command line or command prompt and install the [Angular CLI](https://angular.dev/tools/cli) package:
     ```
@@ -37,7 +37,7 @@ This procedure creates a [basic Angular application](https://angular.dev/install
     cd docspace-angular-demo
     ```
 
-4. Install ONLYOFFICE DocSpace Angular component from **npm** and save it to the *package.json* file with *--save*:
+4. Install ONLYOFFICE Apps Angular component from **npm** and save it to the *package.json* file with *--save*:
     ```
     npm install --save @onlyoffice/docspace-angular @onlyoffice/docspace-sdk-js
     ```
@@ -62,12 +62,12 @@ This procedure creates a [basic Angular application](https://angular.dev/install
     export class App {
       config: TFrameConfig = {
         src: 'http://example-onlyoffice.com',
-        frameId: 'onlyoffice-docspace',
+        frameId: 'onlyoffice-apps',
         mode: 'manager',
         width: '100%',
         height: '100%',
         events: {
-          onAppReady: () => console.log('ONLYOFFICE DocSpace App is ready!'),
+          onAppReady: () => console.log('ONLYOFFICE Apps is ready!'),
           onAppError: (e) => console.log(e),
         },
       };
@@ -78,9 +78,9 @@ This procedure creates a [basic Angular application](https://angular.dev/install
     }
     ```
     Replace the following lines with your own data:
-    * **"http://example-onlyoffice.com"** - replace with the address of your ONLYOFFICE DocSpace, specified without a trailing slash;
+    * **"http://example-onlyoffice.com"** - replace with the address of your ONLYOFFICE Apps instance, specified without a trailing slash;
 
-    This file will create the *App* component containing the ONLYOFFICE DocSpace configured with basic features.
+    This file will create the *App* component containing ONLYOFFICE Apps configured with basic features.
 
     The component is standalone, so it is added to the `imports` of the component that uses it. In an NgModule-based application, add `DocSpaceComponent` to the `imports` of the module instead.
 
@@ -126,17 +126,17 @@ The component is exported as `DocSpaceComponent` and matches the `docspace` sele
 ### Inputs
 | Name | Type | Default | Required | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| `config` | `TFrameConfig` | — | yes | Generic configuration object for opening a file with token. Requires `src` - the address of ONLYOFFICE DocSpace, specified without a trailing slash - and `frameId` - the id of the element the frame is mounted into. [Config API](https://api.onlyoffice.com/docspace/jssdk/config/) |
+| `config` | `TFrameConfig` | — | yes | Generic configuration object for opening a file with token. Requires `src` - the address of ONLYOFFICE Apps, specified without a trailing slash - and `frameId` - the id of the element the frame is mounted into. [Config API](https://api.onlyoffice.com/docspace/jssdk/config/) |
 
 ### Outputs
 | Name | Type | Description |
 | ------------- | ------------- | ------------- |
-| `setDocspaceInstance` | `SDKInstance` | Emitted once, with the DocSpace instance, as soon as the frame is opened. The instance provides API methods for working with DocSpace. |
+| `setDocspaceInstance` | `SDKInstance` | Emitted once, with the ONLYOFFICE Apps instance, as soon as the frame is opened. The instance provides API methods for working with ONLYOFFICE Apps. |
 
 ### Notes
 
-* The `config` input is applied when the component is initialized. To change the configuration of the already opened DocSpace, use the `setConfig` method of the instance obtained via `setDocspaceInstance`, so that the frame is not recreated.
-* The component renders a wrapper element around the DocSpace frame. Its width and height are taken from `config.width` and `config.height` (*100%* by default), which keeps the percentage sizes of the frame working.
+* The `config` input is applied when the component is initialized. To change the configuration of the already opened ONLYOFFICE Apps, use the `setConfig` method of the instance obtained via `setDocspaceInstance`, so that the frame is not recreated.
+* The component renders a wrapper element around the ONLYOFFICE Apps frame. Its width and height are taken from `config.width` and `config.height` (*100%* by default), which keeps the percentage sizes of the frame working.
 * The frame is opened only in the browser. Under server-side rendering the component renders the wrapper and does nothing else, and opens the frame once the application is hydrated on the client.
 * The SDK keys the frames it opens by `frameId`, so two components alive at the same time must not share one.
 
@@ -152,7 +152,7 @@ TestBed.configureTestingModule({
 
 ## Feedback and support
 
-In case you have any issues, questions, or suggestions for the ONLYOFFICE DocSpace Angular component, please refer to the [Issues](https://github.com/ONLYOFFICE/docspace-angular-workspace/issues) section.
+In case you have any issues, questions, or suggestions for the ONLYOFFICE Apps Angular component, please refer to the [Issues](https://github.com/ONLYOFFICE/docspace-angular-workspace/issues) section.
 
 Official project website: [www.onlyoffice.com](https://www.onlyoffice.com/).
 
