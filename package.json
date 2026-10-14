@@ -56,7 +56,7 @@
     "@angular/cli": "^20.3.35",
     "@angular/compiler-cli": "^20.3.0",
     "@angular/platform-browser-dynamic": "^20.3.30",
-    "@onlyoffice/docspace-sdk-js": "^2.1.0",
+    "@onlyoffice/docspace-sdk-js": "^2.2.0",
     "@storybook/addon-docs": "^10.5.10",
     "@storybook/angular": "^10.5.10",
     "@types/jasmine": "~5.1.0",
