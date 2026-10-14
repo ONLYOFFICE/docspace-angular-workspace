@@ -24,7 +24,7 @@ import { DocSpaceComponent } from '@onlyoffice/docspace-angular';
 import { DOCSPACE_FILE_ID, DOCSPACE_URL } from './env';
 
 const onAppReady = () => {
-  console.log('ONLYOFFICE DocSpace App is ready!');
+  console.log('ONLYOFFICE Apps is ready!');
 };
 
 const onAppError = (e?: Event | object | string) => {
@@ -33,7 +33,7 @@ const onAppError = (e?: Event | object | string) => {
 
 const defaultConfig: TFrameConfig = {
   src: DOCSPACE_URL,
-  frameId: 'onlyoffice-docspace',
+  frameId: 'onlyoffice-apps',
   mode: 'manager',
   width: '100%',
   height: '100%',
@@ -100,7 +100,7 @@ export const Manager: Story = {
   args: {
     config: {
       ...defaultConfig,
-      frameId: 'onlyoffice-docspace-manager',
+      frameId: 'onlyoffice-apps-manager',
     },
   },
 };
@@ -109,7 +109,7 @@ export const Editor: Story = {
   args: {
     config: {
       ...defaultConfig,
-      frameId: 'onlyoffice-docspace-editor',
+      frameId: 'onlyoffice-apps-editor',
       mode: 'editor',
       id: DOCSPACE_FILE_ID,
     },
@@ -120,7 +120,7 @@ export const RoomSelector: Story = {
   args: {
     config: {
       ...defaultConfig,
-      frameId: 'onlyoffice-docspace-room-selector',
+      frameId: 'onlyoffice-apps-room-selector',
       mode: 'room-selector',
     },
   },
@@ -130,7 +130,7 @@ export const FileSelector: Story = {
   args: {
     config: {
       ...defaultConfig,
-      frameId: 'onlyoffice-docspace-file-selector',
+      frameId: 'onlyoffice-apps-file-selector',
       mode: 'file-selector',
     },
   },
@@ -140,7 +140,7 @@ export const System: Story = {
   args: {
     config: {
       ...defaultConfig,
-      frameId: 'onlyoffice-docspace-system',
+      frameId: 'onlyoffice-apps-system',
       mode: 'system',
     },
   },

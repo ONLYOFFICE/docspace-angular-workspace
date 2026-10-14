@@ -55,8 +55,8 @@ import { DocSpaceSdk } from '../services/docspace-sdk.service';
 })
 export class DocSpaceComponent implements AfterViewInit, OnDestroy {
   /**
-   * Generic configuration object for opening DocSpace. Requires `src`, the
-   * address of ONLYOFFICE DocSpace specified without a trailing slash, and
+   * Generic configuration object for opening ONLYOFFICE Apps. Requires `src`,
+   * the address of ONLYOFFICE Apps specified without a trailing slash, and
    * `frameId`, the id of the element the frame is mounted into.
    *
    * Applied when the component is initialised: a later change is not picked up,
@@ -67,8 +67,9 @@ export class DocSpaceComponent implements AfterViewInit, OnDestroy {
   readonly config = input.required<TFrameConfig>();
 
   /**
-   * Emits once, with the DocSpace instance, as soon as the frame is opened. The
-   * instance provides the API methods for working with DocSpace.
+   * Emits once, with the ONLYOFFICE Apps instance, as soon as the frame is
+   * opened. The instance provides the API methods for working with ONLYOFFICE
+   * Apps.
    */
   readonly setDocspaceInstance = output<SDKInstance>();
 
@@ -89,7 +90,7 @@ export class DocSpaceComponent implements AfterViewInit, OnDestroy {
 
     // Read once: re-running this would destroy the frame and build a new one,
     // dropping whatever the user was doing in it. To change the configuration of
-    // an open DocSpace, use the instance's setConfig method, which is handed out
+    // an open frame, use the instance's setConfig method, which is handed out
     // through setDocspaceInstance.
     this.instance = this.sdk.initFrame(this.config());
     this.setDocspaceInstance.emit(this.instance);
