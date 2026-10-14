@@ -1,7 +1,7 @@
 {
   "name": "@onlyoffice/docspace-angular",
   "version": "1.0.0",
-  "description": "Angular component for ONLYOFFICE DocSpace",
+  "description": "Angular component for ONLYOFFICE Apps",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/ONLYOFFICE/docspace-angular-workspace/issues",
@@ -19,6 +19,7 @@
   "keywords": [
     "onlyoffice",
     "docspace",
+    "onlyoffice-apps",
     "angular"
   ],
   "peerDependencies": {

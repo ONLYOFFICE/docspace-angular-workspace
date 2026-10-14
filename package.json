@@ -1,6 +1,6 @@
 {
   "name": "@onlyoffice/docspace-angular-workspace",
-  "description": "Angular workspace for the @onlyoffice/docspace-angular library, an Angular component for embedding ONLYOFFICE DocSpace.",
+  "description": "Angular workspace for the @onlyoffice/docspace-angular library, an Angular component for embedding ONLYOFFICE Apps.",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "bugs": {
