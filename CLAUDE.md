@@ -15,13 +15,13 @@ reference live in the library's own `README.md`.
 ```
 npm run build            # ng-packagr build → dist/onlyoffice/docspace-angular
 npm run lint             # ESLint flat config over library, stories and .storybook
-npm run test:ci          # one-shot Karma run in ChromeHeadless (use this, not `npm test`, which watches)
+npm run test:ci          # one-shot Karma run in ChromeHeadlessCI (use this, not `npm test`, which watches)
 npm run storybook        # dev server on :6006, needs .env (see below)
 npm run build-storybook  # → storybook-static
 ```
 
 Run a single spec/test: there is only one spec file; focus a test with `fit`/`fdescribe` and run
-`npm run test:ci`, or pass `--include=<path-to-spec>` (`npx ng test --watch=false --browsers=ChromeHeadless --include=projects/onlyoffice/docspace-angular/src/lib/components/docspace.component.spec.ts`).
+`npm run test:ci`, or pass `--include=<path-to-spec>` (`npx ng test --watch=false --browsers=ChromeHeadlessCI --include=projects/onlyoffice/docspace-angular/src/lib/components/docspace.component.spec.ts`).
 
 CI (`.github/workflows/ci.yml`) runs lint, `test:ci`, build + entry-point check + `npm pack`, and
 `build-storybook` as separate jobs.
@@ -57,6 +57,8 @@ CI (`.github/workflows/ci.yml`) runs lint, `test:ci`, build + entry-point check 
 - The selector is bare `docspace` (part of the public API); the angular-eslint selector-prefix rules
   are disabled on purpose. Lint enforces single quotes (template literals allowed) and semicolons;
   Prettier: `printWidth: 100`, `singleQuote: true`.
+- `test:ci` uses the `ChromeHeadlessCI` launcher from the library's `karma.conf.js` (`--no-sandbox`):
+  Gitea Actions runs jobs as root in a container, where Chrome aborts on the SUID sandbox helper.
 - Source files carry the Ascensio System SIA Apache-2.0 license header — keep it on new files.
 
 ## Branches per Angular version

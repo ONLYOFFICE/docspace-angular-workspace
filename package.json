@@ -23,7 +23,7 @@
     "watch": "ng build --watch --configuration development",
     "lint": "eslint .",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
     "storybook": "ng run @onlyoffice/docspace-angular:storybook",
     "build-storybook": "ng run @onlyoffice/docspace-angular:build-storybook"
   },
