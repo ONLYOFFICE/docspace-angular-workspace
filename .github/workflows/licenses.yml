@@ -1,0 +1,43 @@
+name: Licenses
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, develop]
+    paths: &license-paths
+      - 'package.json'
+      - 'package-lock.json'
+      - 'projects/onlyoffice/docspace-angular/package.json'
+      - '.check-licenses.yml'
+      - 'doc/dependency_decisions.yml'
+      - '.github/workflows/licenses.yml'
+  pull_request:
+    branches: [master, develop]
+    paths: *license-paths
+
+permissions:
+  contents: read
+
+jobs:
+  licenses:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - name: Get Repository License
+        id: license
+        run: |
+          license="${{ (github.event.repository.license.spdx_id) || (github.event.repository.licenses[0]) }}"
+          echo "License detected: $license"
+          echo "license=$license" >> $GITHUB_OUTPUT
+      - name: Check Licenses
+        uses: ONLYOFFICE/check-licenses@v1
+        with:
+          project_license: ${{ steps.license.outputs.license }}
