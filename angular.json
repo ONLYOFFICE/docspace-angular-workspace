@@ -24,7 +24,8 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/onlyoffice/docspace-angular/tsconfig.spec.json"
+            "tsConfig": "projects/onlyoffice/docspace-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/onlyoffice/docspace-angular/karma.conf.js"
           }
         },
         "storybook": {
