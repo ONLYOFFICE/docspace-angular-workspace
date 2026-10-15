@@ -11,46 +11,45 @@ permissions:
 
 jobs:
   release:
+    if: github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
+    env:
+      LIB_DIR: projects/onlyoffice/docspace-angular
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
-      - name: Install NodeJS
+      - name: Setup Node
         uses: actions/setup-node@v7
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org/'
           # Disable automatic dependency caching to reduce cache poisoning risk
           package-manager-cache: false
-      - name: Install dependencies
+      - name: Check the tag matches the package version
+        run: |
+          version="$(node -p "require('./$LIB_DIR/package.json').version")"
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+      - name: Install Dependencies
         run: npm ci
+      - name: Run Tests
+        run: npm run test:ci
       - name: Build Package
         run: npm run build
       - name: Publish to npm
+        working-directory: dist/onlyoffice/docspace-angular
+        run: npm publish --provenance --access public
+      - name: Extract release notes
         run: |
-          cd dist/onlyoffice/docspace-angular
-          name=$(node -p "require('./package.json').name")
-          version=$(node -p "require('./package.json').version")
-          latest=$(npm view "$name" version)
-          new_major=$(echo "$version" | cut -d. -f1)
-          latest_major=$(echo "$latest" | cut -d. -f1)
-          if [ "$new_major" -ge "$latest_major" ]; then
-            npm publish --provenance --access public
-          else
-            npm publish --provenance --access public --tag backport
-          fi
-      - name: Get Info
-        run: |
-          cd ${{ github.workspace }}/projects/onlyoffice/docspace-angular
-          echo "version=$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1)" >> $GITHUB_OUTPUT
-        id: info
-      - name: Generate Changelog
-        run: |
-          cd ${{ github.workspace }}/projects/onlyoffice/docspace-angular
-          awk '/## [0-9]/{p++} p; /## [0-9]/{if (p > 1) exit}' CHANGELOG.md | awk 'NR>2 {print last} {last=$0}' > RELEASE.md
+          awk -v head="## ${GITHUB_REF_NAME#v}" '
+            $0 == head { p = 1; next }
+            /^## / { p = 0 }
+            p
+          ' "$LIB_DIR/CHANGELOG.md" > RELEASE.md
       - name: Create Release
         uses: ncipollo/release-action@v1
-        id: create_release
         with:
-          bodyFile: ${{ github.workspace }}/projects/onlyoffice/docspace-angular/RELEASE.md
-          tag: v${{ steps.info.outputs.version }}
+          bodyFile: RELEASE.md
+          tag: ${{ github.ref_name }}
