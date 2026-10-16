@@ -42,8 +42,8 @@ describe('DocSpaceComponent', () => {
     return fixture;
   }
 
-  function wrapper(): HTMLElement {
-    return fixture.nativeElement.querySelector('.docspace-wrapper');
+  function host(): HTMLElement {
+    return fixture.nativeElement;
   }
 
   beforeEach(() => {
@@ -67,18 +67,20 @@ describe('DocSpaceComponent', () => {
     expect(document.getElementById('ds-frame')).toBeTruthy();
   });
 
-  it('sizes the wrapper from the config', () => {
+  it('renders the placeholder straight into a host that creates no box', () => {
     render({ width: '480px', height: '600px' });
 
-    expect(wrapper().style.width).toBe('480px');
-    expect(wrapper().style.height).toBe('600px');
+    expect(host().children.length).toBe(1);
+    expect(host().firstElementChild?.id).toBe('ds-frame');
+    expect(getComputedStyle(host()).display).toBe('contents');
+    expect(host().style.width).toBe('');
+    expect(host().style.height).toBe('');
   });
 
-  it('falls back to filling its parent when no size is given', () => {
+  it('passes line-height 0 down to the frame container', () => {
     render();
 
-    expect(wrapper().style.width).toBe('100%');
-    expect(wrapper().style.height).toBe('100%');
+    expect(getComputedStyle(host().firstElementChild!).lineHeight).toBe('0px');
   });
 
   it('initialises the frame once, with the given config', () => {
@@ -113,6 +115,16 @@ describe('DocSpaceComponent', () => {
 
     expect(sdk.initFrame).toHaveBeenCalledTimes(1);
     expect(instance.destroyFrame).not.toHaveBeenCalled();
+  });
+
+  it('keeps the mount element id when the frameId changes', () => {
+    render();
+
+    fixture.componentRef.setInput('config', { ...config, frameId: 'other-frame' });
+    fixture.detectChanges();
+
+    expect(document.getElementById('ds-frame')).toBeTruthy();
+    expect(document.getElementById('other-frame')).toBeNull();
   });
 
   it('destroys the frame when the component is destroyed', () => {

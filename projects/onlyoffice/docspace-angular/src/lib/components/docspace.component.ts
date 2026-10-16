@@ -25,6 +25,7 @@ import {
   inject,
   input,
   output,
+  untracked,
 } from '@angular/core';
 
 import type { SDKInstance } from '@onlyoffice/docspace-sdk-js/dist/types/instance';
@@ -34,20 +35,21 @@ import { DocSpaceSdk } from '../services/docspace-sdk.service';
 
 @Component({
   selector: 'docspace',
-  // The wrapper carries the sizes so that a frame asking for a percentage of its
-  // box has a box to measure against. lineHeight: 0 is inherited by the
-  // container the SDK puts the frame in. The frame is an iframe, an inline
-  // element, so it sits on a text baseline and the line box adds the font's
-  // descender space (about 4px) under it. With a frame asking for the full
-  // height of its box, those few pixels are enough to overflow the wrapper and
-  // give the page a scrollbar.
-  template: `
-    <div class="docspace-wrapper" [style.width]="width()" [style.height]="height()">
-      <div [id]="frameId()"></div>
-    </div>
-  `,
+  // The SDK replaces the #frameId placeholder with its own container, so the
+  // host element is the node Angular owns and removes on destroy. display:
+  // contents gives it no box: the container is sized by the SDK from
+  // config.width and config.height, against the element the component is
+  // placed in, and the host never holds on to the size of the first render.
+  //
+  // line-height: 0 is still inherited by the container the SDK puts the frame
+  // in. The frame is an iframe, an inline element, so it sits on a text
+  // baseline and the line box adds the font's descender space (about 4px)
+  // under it. With a frame asking for the full height of its box, those few
+  // pixels are enough to overflow the parent and give the page a scrollbar.
+  template: `<div [id]="frameId()"></div>`,
   styles: `
-    .docspace-wrapper {
+    :host {
+      display: contents;
       line-height: 0;
     }
   `,
@@ -73,9 +75,10 @@ export class DocSpaceComponent implements AfterViewInit, OnDestroy {
    */
   readonly setDocspaceInstance = output<SDKInstance>();
 
-  protected readonly frameId = computed(() => this.config().frameId);
-  protected readonly width = computed(() => this.config().width ?? '100%');
-  protected readonly height = computed(() => this.config().height ?? '100%');
+  // Untracked, so the computed has no dependencies and keeps the first value:
+  // the SDK knows the frame by the id it was opened with, and the mount
+  // element has to keep it for as long as the frame is open.
+  protected readonly frameId = computed(() => untracked(this.config).frameId);
 
   private readonly sdk = inject(DocSpaceSdk);
   private readonly platformId = inject(PLATFORM_ID);
