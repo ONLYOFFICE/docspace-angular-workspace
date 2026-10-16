@@ -135,7 +135,7 @@ The component is exported as `DocSpaceComponent` and matches the `docspace` sele
 ### Notes
 
 * The `config` input is applied when the component is initialized. To change the configuration of the already opened ONLYOFFICE Apps, use the `setConfig` method of the instance obtained via `setDocspaceInstance`, so that the frame is not recreated.
-* The component renders the ONLYOFFICE Apps frame placeholder straight into its `<docspace>` element. ONLYOFFICE Apps replaces the placeholder with its own container, so the `<docspace>` element is what keeps the component removable by Angular. It is styled with `display: contents` and creates no box of its own, so the frame is sized by `config.width` and `config.height` (*100%* by default) against the element you place the component in.
+* The component renders the ONLYOFFICE Apps frame placeholder straight into its `<docspace>` element. ONLYOFFICE Apps replaces the placeholder with its own container, so the `<docspace>` element is what keeps the component removable by Angular. It is styled with `display: contents` and creates no box of its own, so the frame is sized by `config.width` and `config.height` against the element you place the component in. The *100%* default for both comes from ONLYOFFICE Apps SDK ([Config API](https://api.onlyoffice.com/docspace/jssdk/config/)), not from the component.
 * The frame is opened only in the browser. Under server-side rendering the component renders the placeholder and does nothing else, and opens the frame once the application is hydrated on the client.
 * The SDK keys the frames it opens by `frameId`, so two components alive at the same time must not share one.
 
