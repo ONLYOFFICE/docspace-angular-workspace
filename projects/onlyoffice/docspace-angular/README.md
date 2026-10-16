@@ -14,7 +14,7 @@ This repo contains the ONLYOFFICE Apps Angular component which integrates [ONLYO
 
 This procedure requires [Node.js (and npm)](https://nodejs.org/en).
 
-The component is built for Angular 20 and requires *@angular/common*, *@angular/core* and *@onlyoffice/docspace-sdk-js* 2.x as peer dependencies.
+The component is built for Angular 20 and requires *@angular/common*, *@angular/core* and *@onlyoffice/docspace-sdk-js* 2.0.0 or later as peer dependencies.
 
 ## Creating the demo Angular application with ONLYOFFICE Apps
 
