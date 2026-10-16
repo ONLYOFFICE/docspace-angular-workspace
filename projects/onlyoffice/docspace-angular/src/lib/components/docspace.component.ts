@@ -25,6 +25,7 @@ import {
   inject,
   input,
   output,
+  untracked,
 } from '@angular/core';
 
 import type { SDKInstance } from '@onlyoffice/docspace-sdk-js/dist/types/instance';
@@ -34,20 +35,15 @@ import { DocSpaceSdk } from '../services/docspace-sdk.service';
 
 @Component({
   selector: 'docspace',
-  // The wrapper carries the sizes so that a frame asking for a percentage of its
-  // box has a box to measure against. lineHeight: 0 is inherited by the
-  // container the SDK puts the frame in. The frame is an iframe, an inline
-  // element, so it sits on a text baseline and the line box adds the font's
-  // descender space (about 4px) under it. With a frame asking for the full
-  // height of its box, those few pixels are enough to overflow the wrapper and
-  // give the page a scrollbar.
-  template: `
-    <div class="docspace-wrapper" [style.width]="width()" [style.height]="height()">
-      <div [id]="frameId()"></div>
-    </div>
-  `,
+  // The SDK replaces the #frameId placeholder with its own container, sized from
+  // config.width/height. display: contents keeps the host boxless, so percentages
+  // resolve against the parent and the host never pins the first render's size.
+  // line-height: 0 is inherited by that container: the iframe is inline, and the
+  // descender space under its baseline (~4px) would overflow a 100%-high parent.
+  template: `<div [id]="frameId()"></div>`,
   styles: `
-    .docspace-wrapper {
+    :host {
+      display: contents;
       line-height: 0;
     }
   `,
@@ -55,27 +51,22 @@ import { DocSpaceSdk } from '../services/docspace-sdk.service';
 })
 export class DocSpaceComponent implements AfterViewInit, OnDestroy {
   /**
-   * Generic configuration object for opening ONLYOFFICE Apps. Requires `src`,
-   * the address of ONLYOFFICE Apps specified without a trailing slash, and
-   * `frameId`, the id of the element the frame is mounted into.
+   * Generic configuration object for opening ONLYOFFICE Apps. Requires `src`
+   * (without a trailing slash) and `frameId`, the id of the mount element.
    *
-   * Applied when the component is initialised: a later change is not picked up,
-   * see the note in `ngAfterViewInit`.
+   * Read once, on init: re-applying it would rebuild the frame and drop the
+   * user's state. Change an open frame through the instance's `setConfig`.
    *
    * @see https://api.onlyoffice.com/docspace/jssdk/config/
    */
   readonly config = input.required<TFrameConfig>();
 
-  /**
-   * Emits once, with the ONLYOFFICE Apps instance, as soon as the frame is
-   * opened. The instance provides the API methods for working with ONLYOFFICE
-   * Apps.
-   */
+  /** Emits once, with the ONLYOFFICE Apps instance, as soon as the frame is opened. */
   readonly setDocspaceInstance = output<SDKInstance>();
 
-  protected readonly frameId = computed(() => this.config().frameId);
-  protected readonly width = computed(() => this.config().width ?? '100%');
-  protected readonly height = computed(() => this.config().height ?? '100%');
+  // Untracked: the SDK knows the frame by the id it was opened with, so the
+  // mount element must keep it.
+  protected readonly frameId = computed(() => untracked(this.config).frameId);
 
   private readonly sdk = inject(DocSpaceSdk);
   private readonly platformId = inject(PLATFORM_ID);
@@ -83,15 +74,10 @@ export class DocSpaceComponent implements AfterViewInit, OnDestroy {
   private instance?: SDKInstance;
 
   ngAfterViewInit(): void {
-    // The SDK looks the mount element up by id, so the view has to be in the
-    // document already — which rules out ngOnInit. On the server there is no
-    // document at all, and nothing for the frame to render into.
+    // The SDK finds the mount element by id, so the view must already be in the
+    // document (not ngOnInit); on the server there is no document at all.
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Read once: re-running this would destroy the frame and build a new one,
-    // dropping whatever the user was doing in it. To change the configuration of
-    // an open frame, use the instance's setConfig method, which is handed out
-    // through setDocspaceInstance.
     this.instance = this.sdk.initFrame(this.config());
     this.setDocspaceInstance.emit(this.instance);
   }

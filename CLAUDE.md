@@ -29,13 +29,15 @@ CI (`.github/workflows/ci.yml`) runs lint, `test:ci`, build + entry-point check 
 ## Architecture
 
 - `DocSpaceComponent` (`src/lib/components/docspace.component.ts`) — standalone, OnPush, signal
-  `input.required<TFrameConfig>()` named `config` and `output` `setDocspaceInstance`. It renders a
-  wrapper div sized from `config.width/height` with an inner div whose id is `config.frameId`, then
-  in `ngAfterViewInit` (browser platform only — SSR-safe) calls the SDK, which looks the mount
-  element up by id. The config is read **once**; later input changes are intentionally ignored
-  (re-init would destroy the frame) — consumers use the emitted instance's `setConfig`.
-  `ngOnDestroy` calls `destroyFrame()`. The `line-height: 0` on the wrapper is deliberate (prevents
-  iframe baseline overflow/scrollbar).
+  `input.required<TFrameConfig>()` named `config` and `output` `setDocspaceInstance`. It renders
+  only a placeholder div whose id is `config.frameId`, then in `ngAfterViewInit` (browser platform
+  only — SSR-safe) calls the SDK, which looks it up by id and replaces it with its own
+  `<frameId>-container` sized from `config.width/height`. The host is `display: contents` (no box,
+  so it never pins a size — mirrors the React wrapper) with `line-height: 0` (deliberate: prevents
+  iframe baseline overflow/scrollbar). The config is read **once**; later input changes are
+  intentionally ignored (re-init would destroy the frame) — consumers use the emitted instance's
+  `setConfig`. `frameId` is a dependency-free `computed` over `untracked(config)`, so the DOM id
+  can't drift from the id the SDK registered. `ngOnDestroy` calls `destroyFrame()`.
 - `DocSpaceSdk` (`src/lib/services/docspace-sdk.service.ts`) — root-provided injectable seam around
   `new SDK().initFrame(config)`. Exists so tests (and apps) can swap the SDK; a fresh SDK object per
   call so frames share nothing. Specs mock it with `jasmine.createSpyObj` and use
