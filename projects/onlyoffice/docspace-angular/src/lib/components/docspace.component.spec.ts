@@ -142,4 +142,34 @@ describe('DocSpaceComponent', () => {
 
     expect(sdk.initFrame).not.toHaveBeenCalled();
   });
+
+  // Sizing is left to the SDK, so its 100% default is checked against the real
+  // one: a peer release that drops it would break the README's promise.
+  describe('with the real SDK', () => {
+    beforeEach(() => {
+      TestBed.overrideProvider(DocSpaceSdk, { useFactory: () => new DocSpaceSdk() });
+      // The SDK queries the portal on init; left pending, it neither hits the
+      // network nor logs an SDK error.
+      spyOn(window, 'fetch').and.returnValue(new Promise<Response>(() => undefined));
+    });
+
+    // Port 9 is on Chrome's blocked list, so the iframe fails without a request.
+    const offline: Partial<TFrameConfig> = { src: 'http://127.0.0.1:9' };
+
+    it('fills the parent when no size is given', () => {
+      render(offline);
+
+      const container = document.getElementById('ds-frame-container');
+      expect(container?.style.width).toBe('100%');
+      expect(container?.style.height).toBe('100%');
+    });
+
+    it('sizes the frame container from the config', () => {
+      render({ ...offline, width: '480px', height: '600px' });
+
+      const container = document.getElementById('ds-frame-container');
+      expect(container?.style.width).toBe('480px');
+      expect(container?.style.height).toBe('600px');
+    });
+  });
 });
