@@ -1,0 +1,80 @@
+{
+  "name": "@onlyoffice/docspace-angular-workspace",
+  "description": "Angular workspace for the @onlyoffice/docspace-angular library, an Angular component for embedding ONLYOFFICE Apps.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ONLYOFFICE/docspace-angular-workspace/issues",
+    "email": "support@onlyoffice.com"
+  },
+  "homepage": "https://www.onlyoffice.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONLYOFFICE/docspace-angular-workspace.git"
+  },
+  "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
+  "maintainers": [
+    "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
+  ],
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "lint": "eslint .",
+    "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
+    "storybook": "ng run @onlyoffice/docspace-angular:storybook",
+    "build-storybook": "ng run @onlyoffice/docspace-angular:build-storybook"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "dependencies": {
+    "@angular/common": "^22.2.2",
+    "@angular/compiler": "^22.2.2",
+    "@angular/core": "^22.2.2",
+    "@angular/forms": "^22.2.2",
+    "@angular/platform-browser": "^22.2.2",
+    "@angular/router": "^22.2.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^22.2.2",
+    "@angular/animations": "^22.2.2",
+    "@angular/build": "^22.2.2",
+    "@angular/cli": "^22.2.2",
+    "@angular/compiler-cli": "^22.2.2",
+    "@angular/platform-browser-dynamic": "^22.2.2",
+    "@onlyoffice/docspace-sdk-js": "^2.2.0",
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/angular": "^10.5.10",
+    "@types/jasmine": "~5.1.0",
+    "angular-eslint": "^22.6.0",
+    "eslint": "^9.39.5",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^22.2.4",
+    "storybook": "^10.5.10",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.68.0"
+  },
+  "overrides": {
+    "uuid": "^11.1.1",
+    "webpack-dev-middleware": "^7.4.5"
+  }
+}

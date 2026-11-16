@@ -25,6 +25,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
           # Disable automatic dependency caching to reduce cache poisoning risk
           package-manager-cache: false
+      - name: Upgrade npm
+        # Trusted publishing (OIDC) needs npm >= 11.5.1
+        run: npm install -g npm@11
       - name: Check the tag matches the package version
         run: |
           version="$(node -p "require('./$LIB_DIR/package.json').version")"
@@ -40,7 +43,21 @@ jobs:
         run: npm run build
       - name: Publish to npm
         working-directory: dist/onlyoffice/docspace-angular
-        run: npm publish --provenance --access public
+        # Trusted publishing attaches provenance itself, no --provenance flag needed.
+        # A major below the one on npm goes out as `backport` so it doesn't move `latest`.
+        run: |
+          name="$(node -p "require('./package.json').name")"
+          version="$(node -p "require('./package.json').version")"
+          if npm view "$name@$version" version 2>/dev/null | grep -q .; then
+            echo "$name@$version is already on npm, skipping publish"
+            exit 0
+          fi
+          latest="$(npm view "$name" dist-tags.latest 2>/dev/null || true)"
+          if [ -n "$latest" ] && [ "${version%%.*}" -lt "${latest%%.*}" ]; then
+            npm publish --access public --tag backport
+          else
+            npm publish --access public
+          fi
       - name: Extract release notes
         run: |
           awk -v head="## ${GITHUB_REF_NAME#v}" '
